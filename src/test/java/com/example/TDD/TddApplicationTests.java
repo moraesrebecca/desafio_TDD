@@ -56,14 +56,6 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void descadastrarIngredienteEmEstoque_IngredienteNaoEncontrado() {
-		Ingrediente sorvete = new Base(TipoBase.Sorvete);
-
-		assertThrows(IllegalArgumentException.class, () -> armazem.descadastrarIngredienteEmEstoque(sorvete));
-		//TODO: Verificar mensagem "Ingrediente não encontrado"
-	}
-
-	@Test
 	void adicionarQuantidadeDoIngredienteEmEstoque() {
 		Ingrediente ingrediente = new Fruta(TipoFruta.Banana);
 
@@ -97,6 +89,25 @@ class TddApplicationTests {
 		assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, 0));
 		assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, -2));
 		//TODO: Verificar mensagem "Quantidade inválida"
+	}
+
+	@Test
+	void descadastrarIngredienteEmEstoque() {
+		Ingrediente ingrediente = new Fruta(TipoFruta.Banana);
+
+		armazem.cadastrarIngredienteEmEstoque(ingrediente);
+
+		armazem.descadastrarIngredienteEmEstoque(ingrediente);
+
+		assertThrows(IllegalArgumentException.class, () -> armazem.descadastrarIngredienteEmEstoque(ingrediente));
+	}
+
+	@Test
+	void descadastrarIngredienteEmEstoque_IngredienteNaoEncontrado() {
+		Ingrediente sorvete = new Base(TipoBase.Sorvete);
+
+		assertThrows(IllegalArgumentException.class, () -> armazem.descadastrarIngredienteEmEstoque(sorvete));
+		//TODO: Verificar mensagem "Ingrediente não encontrado"
 	}
 
 }
