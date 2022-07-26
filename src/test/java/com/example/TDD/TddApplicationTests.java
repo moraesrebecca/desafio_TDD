@@ -13,17 +13,15 @@ class TddApplicationTests {
 	Armazem armazem = new Armazem();
 	@BeforeEach
 	void setUp() {
-		Armazem armazem = new Armazem();
+		armazem = new Armazem();
 	}
 
 	@Test
 	void cadastrarIngredienteEmEstoqueTest_NovoIngrediente() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
-		assertEquals(0, armazem.consultarQuantidadeDoIngredienteEmEstoque(sorvete));
-
 		armazem.cadastrarIngredienteEmEstoque(sorvete);
-		assertEquals(1, armazem.consultarQuantidadeDoIngredienteEmEstoque(sorvete));
+		assertEquals(0, armazem.consultarQuantidadeDoIngredienteEmEstoque(sorvete));
 	}
 
 	@Test
@@ -48,7 +46,12 @@ class TddApplicationTests {
 	@Test
 	void consultarQuantidadeDoIngredienteEmEstoque() {
 		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
+		final int QUANTIDADE_INICIAL = 0;
 		final int QUANTIDADE = 10;
+
+		armazem.cadastrarIngredienteEmEstoque(ingrediente);
+
+		assertEquals(QUANTIDADE_INICIAL, armazem.consultarQuantidadeDoIngredienteEmEstoque(ingrediente));
 
 		armazem.adicionarQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE);
 
@@ -149,10 +152,9 @@ class TddApplicationTests {
 	void reduzirQuantidadeDoIngredienteEmEstoque_QuantidadeInsuficiente() {
 		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
 
-		final int QUANTIDADE_INICIAL = 6;
 		final int QUANTIDADE_REDUZIDA = 10;
 
-		armazem.adicionarQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_INICIAL);
+		armazem.cadastrarIngredienteEmEstoque(ingrediente);
 
 		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA));
 		//TODO: Verificar mensagem "Quantidade inválida"
