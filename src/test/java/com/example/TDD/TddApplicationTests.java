@@ -17,7 +17,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void cadastrarIngredienteEmEstoqueTest_NovoIngrediente() {
+	void cadastrarIngredienteEmEstoqueTestNovoIngrediente() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
 		armazem.cadastrarIngredienteEmEstoque(sorvete);
@@ -25,7 +25,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void cadastraIngredienteEmEstoque_IngredienteJaCadastrado() {
+	void cadastraIngredienteEmEstoqueIngredienteJaCadastrado() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
 		armazem.cadastrarIngredienteEmEstoque(sorvete);
@@ -35,7 +35,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void consultarQuantidadeDoIngredienteEmEstoque_IngredienteNaoEncontrado() {
+	void consultarQuantidadeDoIngredienteEmEstoqueIngredienteNaoEncontrado() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
 		assertThrows(IllegalArgumentException.class, () -> armazem.consultarQuantidadeDoIngredienteEmEstoque(sorvete));
@@ -78,7 +78,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void adicionarQuantidadeDoIngredienteEmEstoque_IngredienteNaoEncontrado() {
+	void adicionarQuantidadeDoIngredienteEmEstoqueIngredienteNaoEncontrado() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
 		assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, 10));
@@ -86,7 +86,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void adicionarQuantidadeDoIngredienteEmEstoque_QuantidadeMenorOuIgualAZero() {
+	void adicionarQuantidadeDoIngredienteEmEstoqueQuantidadeMenorOuIgualAZero() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
 		assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, 0));
@@ -106,7 +106,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void descadastrarIngredienteEmEstoque_IngredienteNaoEncontrado() {
+	void descadastrarIngredienteEmEstoqueIngredienteNaoEncontrado() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
 		assertThrows(IllegalArgumentException.class, () -> armazem.descadastrarIngredienteEmEstoque(sorvete));
@@ -131,7 +131,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void reduzirQuantidadeDoIngredienteEmEstoque_IngredienteNaoEncontrado() {
+	void reduzirQuantidadeDoIngredienteEmEstoqueIngredienteNaoEncontrado() {
 		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
 		final int QUANTIDADE_REDUZIDA = 3;
 
@@ -140,7 +140,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void reduzirQuantidadeDoIngredienteEmEstoque_QuantidadeMenorOuIgualAZero() {
+	void reduzirQuantidadeDoIngredienteEmEstoqueQuantidadeMenorOuIgualAZero() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
 		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(sorvete, 0));
@@ -149,7 +149,7 @@ class TddApplicationTests {
 	}
 
 	@Test
-	void reduzirQuantidadeDoIngredienteEmEstoque_QuantidadeInsuficiente() {
+	void reduzirQuantidadeDoIngredienteEmEstoqueQuantidadeInsuficiente() {
 		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
 
 		final int QUANTIDADE_REDUZIDA = 10;
