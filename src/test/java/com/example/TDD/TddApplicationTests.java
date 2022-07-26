@@ -110,4 +110,52 @@ class TddApplicationTests {
 		//TODO: Verificar mensagem "Ingrediente não encontrado"
 	}
 
+	@Test
+	void reduzirQuantidadeDoIngredienteEmEstoque() {
+		Ingrediente ingrediente = new Fruta(TipoFruta.Banana);
+
+		final int QUANTIDADE_INICIAL = 10;
+		final int QUANTIDADE_REDUZIDA = 3;
+		final int QUANTIDADE_TOTAL = QUANTIDADE_INICIAL - QUANTIDADE_REDUZIDA;
+
+		armazem.cadastrarIngredienteEmEstoque(ingrediente);
+
+		armazem.adicionarQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_INICIAL);
+
+		armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA);
+
+		assertEquals(QUANTIDADE_TOTAL, armazem.consultarQuantidadeDoIngredienteEmEstoque(ingrediente));
+	}
+
+	@Test
+	void reduzirQuantidadeDoIngredienteEmEstoque_IngredienteNaoEncontrado() {
+		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
+		final int QUANTIDADE_REDUZIDA = 3;
+
+		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA));
+		//TODO: Verificar mensagem "Ingrediente não encontrado"
+	}
+
+	@Test
+	void reduzirQuantidadeDoIngredienteEmEstoque_QuantidadeMenorOuIgualAZero() {
+		Ingrediente sorvete = new Base(TipoBase.Sorvete);
+
+		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(sorvete, 0));
+		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(sorvete, -2));
+		//TODO: Verificar mensagem "Quantidade inválida"
+	}
+
+	@Test
+	void reduzirQuantidadeDoIngredienteEmEstoque_QuantidadeInsuficiente() {
+		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
+
+		final int QUANTIDADE_INICIAL = 6;
+		final int QUANTIDADE_REDUZIDA = 10;
+
+		armazem.adicionarQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_INICIAL);
+
+		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA));
+		//TODO: Verificar mensagem "Quantidade inválida"
+	}
+
 }
