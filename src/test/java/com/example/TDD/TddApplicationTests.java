@@ -63,6 +63,24 @@ class TddApplicationTests {
 		//TODO: Verificar mensagem "Ingrediente não encontrado"
 	}
 
+	@Test
+	void adicionarQuantidadeDoIngredienteEmEstoque() {
+		Ingrediente ingrediente = new Fruta(TipoFruta.Banana);
+
+		final int QUANTIDADE_INICIAL = 10;
+		final int QUANTIDADE_ADICIONADA = 2;
+		final int QUANTIDADE_TOTAL = QUANTIDADE_INICIAL + QUANTIDADE_ADICIONADA;
+
+		armazem.cadastrarIngredienteEmEstoque(ingrediente);
+
+		armazem.adicionarQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_INICIAL);
+
+		assertEquals(QUANTIDADE_INICIAL, armazem.consultarQuantidadeDoIngredienteEmEstoque(ingrediente));
+
+		armazem.adicionarQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_ADICIONADA);
+
+		assertEquals(QUANTIDADE_TOTAL, armazem.consultarQuantidadeDoIngredienteEmEstoque(ingrediente));
+	}
 
 	@Test
 	void adicionarQuantidadeDoIngredienteEmEstoque_IngredienteNaoEncontrado() {
