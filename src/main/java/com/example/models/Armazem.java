@@ -4,6 +4,11 @@ import java.util.TreeMap;
 
 public class Armazem {
     private TreeMap<Ingrediente, Integer> estoque;
+    private final int QUANTIDADE_PADRAO = 0;
+
+    public Armazem() {
+        this.estoque = new TreeMap<>();
+    }
 
     /**
      * Cadastra no estoque um novo ingrediente.
@@ -12,7 +17,16 @@ public class Armazem {
      * @param ingrediente
      * @throws IllegalArgumentException ("Ingrediente já cadastrado") caso o ingrediente já esteja cadastrado.
      */
-    public void cadastrarIngredienteEmEstoque(Ingrediente ingrediente) { }
+    public void cadastrarIngredienteEmEstoque(Ingrediente ingrediente) {
+        handleIngredienteJaCadastrado(ingrediente);
+
+        estoque.put(ingrediente, QUANTIDADE_PADRAO);
+    }
+
+    private void handleIngredienteJaCadastrado(Ingrediente ingrediente) {
+        if(estoque.containsKey(ingrediente))
+            throw new IllegalArgumentException("Ingrediente já cadastrado");
+    }
 
     /**
      * Descadastra no estoque um ingrediente.
