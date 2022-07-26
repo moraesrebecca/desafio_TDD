@@ -64,12 +64,26 @@ public class Armazem {
      * Reduz a quantidade de um determinado ingrediente no estoque.
      *
      * @param ingrediente
-     * @param quantidade
+     * @param quantidadeRemovida
      * @throws IllegalArgumentException ("Ingrediente não encontrado ou quantidade inválida") caso o ingrediente não
      *  exista, a quantidade em estoque seja insuficiente para ser removida ou a quantidade solicitada para remoção
      *  seja menor ou igual a zero.
      */
-    public void reduzirQuantidadeDoIngredienteEmEstoque(Ingrediente ingrediente, Integer quantidade) { }
+    public void reduzirQuantidadeDoIngredienteEmEstoque(Ingrediente ingrediente, Integer quantidadeRemovida) {
+        handleIngredienteInexistente(ingrediente);
+        handleQuantidadeInvalida(quantidadeRemovida);
+        handleQuantidadeInsuficiente(ingrediente, quantidadeRemovida);
+
+        final int novaQuantidade = estoque.get(ingrediente) - quantidadeRemovida;
+        estoque.replace(ingrediente, novaQuantidade);
+    }
+
+    private void handleQuantidadeInsuficiente(Ingrediente ingrediente, Integer quantidade) {
+        final int quantidadeAtual = estoque.get(ingrediente);
+        if (quantidade > quantidadeAtual) {
+            throw new IllegalArgumentException("Quantidade inválida");
+        }
+    }
 
     /**
      * Busca a quantidade de um determinado ingrediente no estoque.
