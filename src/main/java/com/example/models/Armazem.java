@@ -65,7 +65,9 @@ public class Armazem {
      * @throws IllegalArgumentException ("Ingrediente não encontrado") caso não exista o ingrediente.
      */
     public Integer consultarQuantidadeDoIngredienteEmEstoque(Ingrediente ingrediente) {
-        return 0;
+        handleIngredienteInexistente(ingrediente);
+
+        return estoque.get(ingrediente);
     }
 
     private void handleIngredienteInexistente(Ingrediente ingrediente) {
