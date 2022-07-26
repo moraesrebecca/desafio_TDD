@@ -53,4 +53,9 @@ public class Armazem {
     public Integer consultarQuantidadeDoIngredienteEmEstoque(Ingrediente ingrediente) {
         return 0;
     }
+
+    private void handleIngredienteInexistente(Ingrediente ingrediente) {
+        if (!estoque.containsKey(ingrediente))
+            throw new IllegalArgumentException("Ingrediente não encontrado");
+    }
 }
