@@ -34,7 +34,10 @@ public class Armazem {
      * @param ingrediente
      * @throws IllegalArgumentException ("Ingrediente não encontrado") caso o ingrediente não exista no estoque.
      */
-    public void descadastrarIngredienteEmEstoque(Ingrediente ingrediente) { }
+    public void descadastrarIngredienteEmEstoque(Ingrediente ingrediente) {
+        handleIngredienteInexistente(ingrediente);
+        estoque.remove(ingrediente);
+    }
 
     /**
      * Adiciona uma determinada quantidade de um ingrediente específico no estoque.
