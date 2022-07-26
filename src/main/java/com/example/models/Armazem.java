@@ -43,7 +43,7 @@ public class Armazem {
      * Adiciona uma determinada quantidade de um ingrediente específico no estoque.
      *
      * @param ingrediente
-     * @param quantidade
+     * @param quantidadeAdicionada
      * @throws IllegalArgumentException ("Ingrediente não encontrado ou quantidade inválida") caso o ingrediente não
      *  exista no estoque ou a quantidade informada seja menor ou igual a zero.
      */
