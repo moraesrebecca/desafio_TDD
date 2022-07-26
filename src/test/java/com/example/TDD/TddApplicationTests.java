@@ -45,6 +45,15 @@ class TddApplicationTests {
 
 	}
 
+	@Test
+	void consultarQuantidadeDoIngredienteEmEstoque() {
+		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
+		final int QUANTIDADE = 10;
+
+		armazem.adicionarQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE);
+
+		assertEquals(QUANTIDADE, armazem.consultarQuantidadeDoIngredienteEmEstoque(ingrediente));
+	}
 
 	@Test
 	void descadastrarIngredienteEmEstoque_IngredienteNaoEncontrado() {
