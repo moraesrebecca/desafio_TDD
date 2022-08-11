@@ -30,16 +30,18 @@ class TddApplicationTests {
 
 		armazem.cadastrarIngredienteEmEstoque(sorvete);
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.cadastrarIngredienteEmEstoque(sorvete));
-		//TODO: Verificar mensagem "Ingrediente já cadastrado"
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> armazem.cadastrarIngredienteEmEstoque(sorvete));
+
+		assertEquals("Ingrediente já cadastrado", exception.getMessage());
 	}
 
 	@Test
 	void consultarQuantidadeDoIngredienteEmEstoqueIngredienteNaoEncontrado() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.consultarQuantidadeDoIngredienteEmEstoque(sorvete));
-		//TODO: Verificar mensagem "Ingrediente não encontrado"
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> armazem.consultarQuantidadeDoIngredienteEmEstoque(sorvete));
+
+		assertEquals("Ingrediente não encontrado", exception.getMessage());
 
 	}
 
@@ -81,17 +83,28 @@ class TddApplicationTests {
 	void adicionarQuantidadeDoIngredienteEmEstoqueIngredienteNaoEncontrado() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, 10));
-		//TODO: Verificar mensagem "Ingrediente não encontrado"
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, 10));
+
+		assertEquals("Ingrediente não encontrado", exception.getMessage());
+
 	}
 
 	@Test
 	void adicionarQuantidadeDoIngredienteEmEstoqueQuantidadeMenorOuIgualAZero() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
+		armazem.cadastrarIngredienteEmEstoque(sorvete);
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, 0));
-		assertThrows(IllegalArgumentException.class, () -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, -2));
-		//TODO: Verificar mensagem "Quantidade inválida"
+		Exception exceptionQtdNula = assertThrows(IllegalArgumentException.class,
+				() -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, 0));
+
+		assertEquals("Quantidade inválida", exceptionQtdNula.getMessage());
+
+		Exception exceptionQtdNegativa = assertThrows(IllegalArgumentException.class,
+				() -> armazem.adicionarQuantidadeDoIngredienteEmEstoque(sorvete, -2));
+
+		assertEquals("Quantidade inválida", exceptionQtdNegativa.getMessage());
+
+
 	}
 
 	@Test
@@ -109,8 +122,9 @@ class TddApplicationTests {
 	void descadastrarIngredienteEmEstoqueIngredienteNaoEncontrado() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.descadastrarIngredienteEmEstoque(sorvete));
-		//TODO: Verificar mensagem "Ingrediente não encontrado"
+		Exception exception = assertThrows(IllegalArgumentException.class,
+				() -> armazem.descadastrarIngredienteEmEstoque(sorvete));
+		assertEquals("Ingrediente não encontrado", exception.getMessage());
 	}
 
 	@Test
@@ -135,17 +149,26 @@ class TddApplicationTests {
 		Ingrediente ingrediente = new Base(TipoBase.Sorvete);
 		final int QUANTIDADE_REDUZIDA = 3;
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA));
-		//TODO: Verificar mensagem "Ingrediente não encontrado"
+		Exception exception = assertThrows(
+				IllegalArgumentException.class,
+				() -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA));
+		assertEquals("Ingrediente não encontrado", exception.getMessage());
 	}
 
 	@Test
 	void reduzirQuantidadeDoIngredienteEmEstoqueQuantidadeMenorOuIgualAZero() {
 		Ingrediente sorvete = new Base(TipoBase.Sorvete);
+		armazem.cadastrarIngredienteEmEstoque(sorvete);
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(sorvete, 0));
-		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(sorvete, -2));
-		//TODO: Verificar mensagem "Quantidade inválida"
+		Exception exception1 = assertThrows(
+				IllegalArgumentException.class,
+				() -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(sorvete, 0));
+		assertEquals("Quantidade inválida", exception1.getMessage());
+
+		Exception exception2 = assertThrows(
+				IllegalArgumentException.class,
+				() -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(sorvete, -2));
+		assertEquals("Quantidade inválida", exception2.getMessage());
 	}
 
 	@Test
@@ -156,8 +179,11 @@ class TddApplicationTests {
 
 		armazem.cadastrarIngredienteEmEstoque(ingrediente);
 
-		assertThrows(IllegalArgumentException.class, () -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA));
-		//TODO: Verificar mensagem "Quantidade inválida"
+		Exception exception = assertThrows(
+				IllegalArgumentException.class,
+				() -> armazem.reduzirQuantidadeDoIngredienteEmEstoque(ingrediente, QUANTIDADE_REDUZIDA));
+
+		assertEquals("Quantidade inválida", exception.getMessage());
 	}
 
 }
